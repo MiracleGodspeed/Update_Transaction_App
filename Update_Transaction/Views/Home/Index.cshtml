@@ -1,0 +1,87 @@
+﻿@model Update_Transaction.Models.ViewModel
+
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<head>
+    <link href="~/css/sweetalert.css" rel="stylesheet" />
+    <script src="~/js/sweetalert.min.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+   
+
+            $("#reg__btn").click(function () {
+
+
+                var fullname = $('#fullname').val();
+                var username = $('#username').val();
+                if (fullname == null || username == null || fullname == 'undefined' || username == 'undefind') {
+                    swal("System Notice", "Enter Name and Username", "error")
+
+                }
+                //$('#preloader').show()
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Index")',
+                    dataType: 'json',
+                    data: { fullname, username},
+                    success: function (response) {
+                        console.log(response);
+                        swal("Account Created!", "Your account was created successfuly! " +"Your Wallet Address is: " +" " + response.newWalletId + " " +". Kindly Copy your wallet address and paste somewhere safe as you would need it to access your acoount subsequently.", "success");
+                        
+                        //$('#preloader').hide()
+                    },
+                    error: function (ex) {
+                        swal("System Notice", "Error executing request.", "error")
+                    }
+                });
+
+            });
+
+        });
+    </script>
+</head>
+<div class="text-center">
+    <h1 class="display-4">Welcome to Update Transaction App</h1>
+    <p>Registration is free and fast! Fill in the form below to get started or <a href="/Home/Login">Click here to manage transactions</a>.</p>
+
+
+    <br />
+    <br />
+    <br />
+
+
+</div>
+@*<form asp-action="Enter" asp-controller="Account" method="POST">*@
+
+
+    <div class="row">
+        <div class="col-md-7">
+            <div class="form-group">
+                <label class="label-control">Fullname</label>
+                <input type="text" class="form-control" asp-for="Fullname" id="fullname"/>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-7">
+            <div class="form-group">
+                <label class="label-control">Prefered Username</label>
+                <input type="text" class="form-control" asp-for="Username" id="username"/>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-7">
+            <button class="btn btn-primary" id="reg__btn">Submit</button>
+
+        </div>
+
+    </div>
+@*</form>*@
