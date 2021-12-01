@@ -17,3 +17,5 @@ The system generates a Wallet ID for the user which the user uses to access thei
 The link 'Manage transaction' presents the user with an input where he/she is expected to slot in their wallet addresses for transactions mangement
 such as deposit, withrawal.
 
+For smooth App run, kindly check the appsettings.json file to make sure the server parameter corresponds with your SQLSERVER Username.
+
